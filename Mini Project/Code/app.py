@@ -21,9 +21,73 @@ with open('app.css') as f:
 model = joblib.load('model.pkl')
 le = joblib.load('encoder.pkl')
 
-input_names = {'school' : 'Select School type', 'gender' : 'Gender', 'age' : "Age", 'address' : "Address",'famsize':"Family Size", 'Pstatus' : "Pstatus", 'Medu' : "Mother Education",'Fedu' :"Father Education",'Mjob' : "Mother Job", 'Fjob' : "Father Job",'reason' : "Reason",'guardian' :"Guardian",'traveltime' : "Travel Time(hrs)",'studytime' : "Study Time(hrs)",'failures' :"Failures",'schoolsup' : "School Support",'famsup' : "Family Support",'paid' : "Fee paid",'activities' : "Activities",'nursery':"Nursery",'higher' : "Higher Education??",'internet' : "Internet",'romantic' : "Romantic",'famrel' : "Family relatives",'freetime' :"Free Time(hrs)",'goout' : "Vacation/Go out Time(hrs)",'Dalc' : "Dalc",'Walc' : "Walc",'health' : "Health",'absences' : "Days absent"}
-input_type = {'school' : ['',"MS","GP"], 'gender' :['',"M","F"], 'address' : ['',"R","U"],'famsize':['',"GT3","LE3"], 'Pstatus' : ['',"T","A"], 'Medu' : ['',0,1,2,3,4],'Fedu' : ['',0,1,2,3,4],'Mjob' : ['',"Teacher","at home","health","services","other"],'Fjob' : ['',"Teacher","at home","health","services","other"],'reason' : ['',"Reputation","Course","Home","other"],'guardian' : ['',"Father","Mother","Other"],'traveltime' : ['',1,2,3,4],'studytime' : ['',1,2,3,4],'failures' : ['',0,1,2,3],'schoolsup' : ['',"Yes","No"],'famsup' : ['',"Yes","No"],'paid' : ['',"Yes","No"],'activities' : ['',"Yes","No"],'nursery' : ['',"Yes","No"],'higher' : ['',"Yes","No"],'internet' : ['',"Yes","No"],'romantic' : ['',"Yes","No"],'famrel' : ['',1,2,3,4],'freetime' : ['',1,2,3,4],'goout' : ['',1,2,3,4],'Dalc' : ['',1,2,3,4],'Walc' : ['',1,2,3,4],'health' : ['',1,2,3,4]}
-input_lst=[]
+
+input_names = {
+    'school': 'Select School type',
+    'gender': 'Gender',
+    'age': "Age",
+    'address': "Address",
+    'famsize': "Family Size",
+    'Pstatus': "Pstatus",
+    'Medu': "Mother Education",
+    'Fedu': "Father's Education Rating",
+    'Mjob': "Mother Job",
+    'Fjob': "Father Job",
+    'reason': "Reason",
+    'guardian': "Guardian",
+    'traveltime': "Travel Time(hrs)",
+    'studytime': "Study Time(hrs)",
+    'failures': "Failures",
+    'schoolsup': "School Support",
+    'famsup': "Family Support",
+    'paid': "Fee paid",
+    'activities': "Activities",
+    'nursery': "Nursery",
+    'higher': "Higher Education??",
+    'internet': "Internet",
+    'romantic': "Romantic",
+    'famrel': "Family relatives",
+    'freetime': "Free Time(hrs)",
+    'goout': "Vacation/Go out Time(hrs)",
+    'Dalc': "Dalc",
+    'Walc': "Walc",
+    'health': "Health",
+    'absences': "Days absent"
+}
+
+input_type = {
+    'school': ['', "MS", "GP"],
+    'gender': ['', "M", "F"],
+    'address': ['', "R", "U"],
+    'famsize': ['', "GT3", "LE3"],
+    'Pstatus': ['', "T", "A"],
+    'Medu': ['', 0, 1, 2, 3, 4],
+    'Fedu': ['', 0, 1, 2, 3, 4],
+    'Mjob': ['', "Teacher", "at home", "health", "services", "other"],
+    'Fjob': ['', "Teacher", "at home", "health", "services", "other"],
+    'reason': ['', "Reputation", "Course", "Home", "other"],
+    'guardian': ['', "Father", "Mother", "Other"],
+    'traveltime': ['', 1, 2, 3, 4],
+    'studytime': ['', 1, 2, 3, 4],
+    'failures': ['', 0, 1, 2, 3],
+    'schoolsup': ['', "Yes", "No"],
+    'famsup': ['', "Yes", "No"],
+    'paid': ['', "Yes", "No"],
+    'activities': ['', "Yes", "No"],
+    'nursery': ['', "Yes", "No"],
+    'higher': ['', "Yes", "No"],
+    'internet': ['', "Yes", "No"],
+    'romantic': ['', "Yes", "No"],
+    'famrel': ['', 1, 2, 3, 4],
+    'freetime': ['', 1, 2, 3, 4],
+    'goout': ['', 1, 2, 3, 4],
+    'Dalc': ['', 1, 2, 3, 4],
+    'Walc': ['', 1, 2, 3, 4],
+    'health': ['', 1, 2, 3, 4]
+}
+
+input_lst = []
+
 
 with st.form(key="my_form", clear_on_submit=True):
     selected_features_list = model.feature_names
